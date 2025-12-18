@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Reunião de Boas-Vindas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Reunião de Boas-Vindas</h1>
+  <p>Preenchimento guiado</p>
+</header>
+
+<main>
+  <section id="formulario">
+    <h2>Dados do Cliente</h2>
+
+    <label>
+      Código do Cliente
+      <input type="text" id="codigoCliente">
+    </label>
+
+    <label>
+      Razão Social
+      <input type="text" id="razaoSocial">
+    </label>
+
+    <label>
+      Data da Reunião
+      <input type="date" id="dataReuniao">
+    </label>
+
+    <h2>Alinhamentos</h2>
+
+    <label>
+      Escopo da Implantação
+      <textarea id="escopo"></textarea>
+    </label>
+
+    <label>
+      Próximos Passos
+      <textarea id="proximosPassos"></textarea>
+    </label>
+
+    <button id="btnGerar">Gerar Documento</button>
+  </section>
+
+  <section id="preview">
+    <h2>Pré-visualização</h2>
+    <div id="paginaA4"></div>
+  </section>
+</main>
+
+<script src="js/app.js"></script>
+<script src="js/preview.js"></script>
+<script src="js/export.js"></script>
+</body>
+</html>
