@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  margin: 0;
+}
+
+header {
+  background: #fa6400;
+  color: white;
+  padding: 20px;
+}
+
+main {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+#formulario {
+  width: 40%;
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+#formulario label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+#formulario input,
+#formulario textarea {
+  width: 100%;
+  padding: 8px;
+}
+
+#preview {
+  width: 60%;
+}
+
+#paginaA4 {
+  background: white;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
