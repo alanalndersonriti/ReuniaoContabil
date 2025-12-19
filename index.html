@@ -1,60 +1,217 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Reunião de Boas-Vindas</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Ata - Abas no Topo com Dicas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-  <h1>Reunião de Boas-Vindas</h1>
-  <p>Preenchimento guiado</p>
-</header>
+<div class="main-container">
+    <div class="editor-container">
+        <div class="editor-header">
+            <div class="app-title">Gerador de Ata</div>
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab('tab-geral')">Geral</button>
+                <button class="tab-btn" onclick="openTab('tab-part')">Participantes</button>
+                <button class="tab-btn" onclick="openTab('tab-conv')">Conversão</button>
+                
+                <button class="tab-btn hidden" id="btn-medias" onclick="openTab('tab-medias')">Médias</button>
+                <button class="tab-btn hidden" id="btn-relat" onclick="openTab('tab-relat')">Relatórios</button>
+                <button class="tab-btn hidden" id="btn-contabil" onclick="openTab('tab-contabil')">Contábil</button>
+                <button class="tab-btn hidden" id="btn-rbt12" onclick="openTab('tab-rbt12')">RBT12</button>
+                <button class="tab-btn hidden" id="btn-metas" onclick="openTab('tab-metas')">Metas</button>
+                
+                <button class="tab-btn" onclick="openTab('tab-perfil2')">Perfil II</button>
+                <button class="tab-btn" onclick="openTab('tab-dificuldades')">Dificuldades</button>
+                <button class="tab-btn" onclick="openTab('tab-patrimonio')">Patrimônio</button>
+                <button class="tab-btn" onclick="openTab('tab-honorarios')">Honorários</button>
+                <button class="tab-btn" onclick="openTab('tab-perfil')">Perfil</button>
+                <button class="tab-btn" onclick="openTab('tab-tecnica')">Técnica</button>
+                <button class="tab-btn" onclick="openTab('tab-modulos')">Módulos</button>
+            </div>
+        </div>
 
-<main>
-  <section id="formulario">
-    <h2>Dados do Cliente</h2>
+        <div class="editor-content">
+            <div id="tab-geral" class="tab-section active">
+                <div class="input-group"><label>Código</label><input type="text" id="inputCodigo"></div>
+                <div class="input-group"><label>Razão Social</label><input type="text" id="inputRazao"></div>
+            </div>
 
-    <label>
-      Código do Cliente
-      <input type="text" id="codigoCliente">
-    </label>
+            <div id="tab-part" class="tab-section">
+                <div class="input-group"><label>Técnicos Resulta</label><textarea id="inputTecnicos"></textarea></div>
+                <div class="input-group"><label>Usuários Folha</label><textarea id="inputFolha"></textarea></div>
+                <div class="input-group"><label>Usuários Escrita</label><textarea id="inputEscrita"></textarea></div>
+                <div class="input-group"><label>Usuários Contábil</label><textarea id="inputContabil"></textarea></div>
+                <div class="input-group"><label>Patrocinadores</label><textarea id="inputAdmins"></textarea></div>
+            </div>
 
-    <label>
-      Razão Social
-      <input type="text" id="razaoSocial">
-    </label>
+            <div id="tab-conv" class="tab-section">
+                <div class="input-group">
+                    <label>Tipo de Conversão</label>
+                    <select id="selTipoConversao" onchange="updateAll()">
+                        <option value="">Selecionar...</option>
+                        <option value="Somente cadastro das empresas">Somente cadastro das empresas</option>
+                        <option value="Conversão parcial da folha">Conversão parcial da folha</option>
+                        <option value="Conversão de todas as empresas">Conversão de todas as empresas</option>
+                        <option value="Não haverá conversão de dados">Não haverá conversão de dados</option>
+                    </select>
+                </div>
+                <div id="grupoCamposConversao" class="hidden">
+                    <div class="input-group"><label>Coleta do Banco</label><input type="date" id="inputDataColeta"></div>
+                    <div class="input-group"><label>Disp. Planilha</label><input type="date" id="inputDataPlanilha"></div>
+                    <div class="input-group"><label>Retorno Planilha</label><input type="date" id="inputDataRetorno"></div>
+                    <div class="input-group"><label>Prazo Conclusão</label><input type="date" id="inputPrazo"></div>
+                    <div class="input-group"><label>Obs. Conversão</label><textarea id="inputObsConversao"></textarea></div>
+                </div>
+            </div>
 
-    <label>
-      Data da Reunião
-      <input type="date" id="dataReuniao">
-    </label>
+            <div id="tab-medias" class="tab-section">
+                <div class="input-group"><label>Permite médias?</label><select id="selPermiteMedias" onchange="updateAll()"><option value="">Selecionar...</option><option>SIM</option><option>NÃO</option></select></div>
+                <div class="input-group"><label id="lblObsMedias">Detalhes:</label><textarea id="inputObsMedias"></textarea></div>
+            </div>
 
-    <h2>Alinhamentos</h2>
+            <div id="tab-relat" class="tab-section">
+                <div class="input-group"><label>Possui relatórios?</label><select id="selRelatorios" onchange="updateAll()"><option value="">Selecionar...</option><option>SIM</option><option>NÃO</option></select></div>
+                <div id="camposRelatoriosSim" class="hidden"><div class="input-group"><label>Meta entrega:</label><input type="date" id="inputMetaRelatorios"></div><div class="input-group"><label>Responsável:</label><input type="text" id="inputRespRelatorios"></div></div>
+                <div class="input-group"><label>Obs:</label><textarea id="inputObsRelatorios"></textarea></div>
+            </div>
 
-    <label>
-      Escopo da Implantação
-      <textarea id="escopo"></textarea>
-    </label>
+            <div id="tab-contabil" class="tab-section">
+                <div class="input-group"><label>Plano utilizado?</label><select id="selPlanoContas" onchange="updateAll()"><option value="">Selecionar...</option><option>Será utilizado o plano de contas padrão Dominio</option><option>Será utilizado o plano de contas do software anterior</option></select></div>
+                <div class="input-group hidden" id="grupoTrazerPlano"><label>Trazer plano anterior?</label><select id="selTrazerPlano" onchange="updateAll()"><option value="">Selecionar...</option><option>SIM</option><option>NÃO</option></select></div>
+                <div class="input-group"><label>Saldos</label><select id="selSaldosAnteriores" onchange="updateAll()"><option value="">Selecionar...</option><option>Será feito a implantação de saldos</option><option>Será feito a importação de lançamentos</option></select></div>
+                <div class="input-group hidden" id="grupoMetodoImportacao"><label>Método Importação:</label><select id="selMetodoImportacao" onchange="updateAll()"><option value="">Selecionar...</option><option>Combinado do escritorio gerar os arquivos SPED</option><option>Será gerado direto do banco de dados anterior</option></select></div>
+                <div id="alertaDePara" class="alert-box hidden"><b>⚠️ DE/PARA Necessário!</b> Detalhe abaixo.</div>
+                <div class="input-group"><label id="lblObsContabil">Obs:</label><textarea id="inputObsContabil"></textarea></div>
+            </div>
 
-    <label>
-      Próximos Passos
-      <textarea id="proximosPassos"></textarea>
-    </label>
+            <div id="tab-rbt12" class="tab-section">
+                <div class="input-group"><label>Inclusão:</label><select id="selRbt12Inclusao" onchange="updateAll()"><option value="">Selecionar...</option><option>A inclusão será feita de forma individual para cada empresa que iniciar a parametrização.</option><option>Escritorio irá salvar os extratos em PDF e nos disponibilizar.</option><option>Escritorio irá preencher a planilha de excel abaixo e nos disponibilizar.</option></select></div>
+                <div id="camposRbt12Extras" class="hidden"><div class="input-group"><label>Meta retorno:</label><input type="date" id="inputMetaRbt12"></div><div class="input-group"><label>Responsável:</label><input type="text" id="inputRespRbt12"></div></div>
+            </div>
 
-    <button id="btnGerar">Gerar Documento</button>
-  </section>
+            <div id="tab-perfil2" class="tab-section">
+                <div class="input-group"><label>Conhece Domínio?</label><select id="selUserDominio" onchange="updateAll()"><option value="">Selecionar...</option><option>NÃO</option><option>SIM</option></select></div><div class="input-group hidden" id="divUserDominio"><label>Quem?</label><input type="text" id="inputUserDominio"></div>
+                <div class="input-group"><label>Captura notas?</label><select id="selCaptura" onchange="updateAll()"><option value="">Selecionar...</option><option>NÃO</option><option>SIM</option></select></div><div class="input-group hidden" id="divCaptura"><label>Qual?</label><input type="text" id="inputCaptura"></div>
+                <div class="input-group"><label>Auditoria?</label><select id="selAuditoria" onchange="updateAll()"><option value="">Selecionar...</option><option>NÃO</option><option>SIM</option></select></div><div class="input-group hidden" id="divAuditoria"><label>Qual?</label><input type="text" id="inputAuditoria"></div>
+                <div class="input-group"><label>Outros?</label><select id="selOutrosSoft" onchange="updateAll()"><option value="">Selecionar...</option><option>NÃO</option><option>SIM</option></select></div><div class="input-group hidden" id="divOutrosSoft"><label>Qual?</label><input type="text" id="inputOutrosSoft"></div>
+                <div class="input-group"><label>Integração API (ERPs):</label><textarea id="inputErpApi"></textarea></div><div class="input-group"><label>Obs Gerais:</label><textarea id="inputObsPerfil2"></textarea></div>
+            </div>
 
-  <section id="preview">
-    <h2>Pré-visualização</h2>
-    <div id="paginaA4"></div>
-  </section>
-</main>
+            <div id="tab-metas" class="tab-section">
+                <div class="meta-title">FOLHA:</div><div class="meta-grid"><div><label class="meta-label">Início</label><input type="date" id="folha_ini" onchange="calcMetas()"></div><div><label class="meta-label">Fim</label><input type="date" id="folha_fim" onchange="calcMetas()"></div><div><label class="meta-label">Funcs.</label><input type="number" id="folha_func" value="0" onchange="calcMetas()"></div><div><label class="meta-label">Empresas</label><input type="number" id="folha_emp" value="0" onchange="calcMetas()"></div></div><div class="meta-grid-res"><div><label class="meta-label">Diária</label><input type="text" id="folha_dia" class="input-read"></div><div><label class="meta-label">Semanal</label><input type="text" id="folha_sem" class="input-read"></div><div><label class="meta-label">Dias Úteis</label><input type="text" id="folha_dias" class="input-read"></div></div>
+                <div class="meta-title">FISCAL:</div><div class="meta-grid"><div><label class="meta-label">Início</label><input type="date" id="fiscal_ini" onchange="calcMetas()"></div><div><label class="meta-label">Fim</label><input type="date" id="fiscal_fim" onchange="calcMetas()"></div><div><label class="meta-label">Funcs.</label><input type="number" id="fiscal_func" value="0" onchange="calcMetas()"></div><div><label class="meta-label">Empresas</label><input type="number" id="fiscal_emp" value="0" onchange="calcMetas()"></div></div><div class="meta-grid-res"><div><label class="meta-label">Diária</label><input type="text" id="fiscal_dia" class="input-read"></div><div><label class="meta-label">Semanal</label><input type="text" id="fiscal_sem" class="input-read"></div><div><label class="meta-label">Dias Úteis</label><input type="text" id="fiscal_dias" class="input-read"></div></div>
+                <div class="meta-title">CONTÁBIL:</div><div class="meta-grid"><div><label class="meta-label">Início</label><input type="date" id="contabil_ini" onchange="calcMetas()"></div><div><label class="meta-label">Fim</label><input type="date" id="contabil_fim" onchange="calcMetas()"></div><div><label class="meta-label">Funcs.</label><input type="number" id="contabil_func" value="0" onchange="calcMetas()"></div><div><label class="meta-label">Empresas</label><input type="number" id="contabil_emp" value="0" onchange="calcMetas()"></div></div><div class="meta-grid-res"><div><label class="meta-label">Diária</label><input type="text" id="contabil_dia" class="input-read"></div><div><label class="meta-label">Semanal</label><input type="text" id="contabil_sem" class="input-read"></div><div><label class="meta-label">Dias Úteis</label><input type="text" id="contabil_dias" class="input-read"></div></div>
+                <div style="display:flex; gap:10px; font-size:0.8rem; margin-bottom:5px;"><label><input type="checkbox" id="chkResumoTabela" onchange="updateAll()"> TABELA</label><label><input type="checkbox" id="chkResumoDescrito" checked onchange="updateAll()"> TEXTO</label></div>
+                <button class="btn-processar" onclick="gerarTextoMetas()">📋 GERAR TEXTO</button>
+                <div class="input-group"><label>RESUMO:</label><textarea id="txtResumoMetas"></textarea></div>
+            </div>
 
-<script src="app.js"></script>
-<script src="preview.js"></script>
-<script src="export.js"></script>
+            <div id="tab-dificuldades" class="tab-section">
+                <div class="input-group"><label>Folha:</label><textarea id="inputDifFolha"></textarea></div>
+                <div class="input-group"><label>Escrita:</label><textarea id="inputDifEscrita"></textarea></div>
+                <div class="input-group"><label>Contabilidade:</label><textarea id="inputDifContabil"></textarea></div>
+            </div>
+
+            <div id="tab-patrimonio" class="tab-section">
+                <div class="input-group"><label>Possui módulo?</label><select id="selPossuiPatrimonio" onchange="updateAll()"><option value="">Selecionar...</option><option value="NÃO">NÃO</option><option value="SIM">SIM</option></select></div>
+                <div id="grupoPatrimonioDetalhes" class="hidden"><div class="input-group"><label>Controle de Bens?</label><select id="selControleBens" onchange="updateAll()"><option value="">Selecionar...</option><option value="NÃO">NÃO</option><option value="SIM">SIM</option></select></div><div class="input-group"><label>Detalhes:</label><textarea id="inputObsPatrimonio"></textarea></div></div>
+            </div>
+
+            <div id="tab-honorarios" class="tab-section">
+                <div class="input-group"><label>Possui módulo?</label><select id="selPossuiHonorarios" onchange="updateAll()"><option value="">Selecionar...</option><option value="NÃO">NÃO</option><option value="SIM">SIM</option></select></div>
+                <div class="camposHonorarios hidden">
+                    <div class="input-group"><label>Boletos?</label><select id="selBoletos" onchange="updateAll()"><option value="">Selecionar...</option><option value="NÃO">NÃO</option><option value="SIM">SIM</option></select></div>
+                    <div class="input-group hidden" id="grupoBanco"><label>Banco:</label><input type="text" id="inputBanco"></div>
+                    <div class="input-group"><label>NFS-e?</label><select id="selNFS"><option value="">Selecionar...</option><option value="NÃO">NÃO</option><option value="SIM">SIM</option></select></div>
+                    <div class="input-group"><label>Responsável:</label><input type="text" id="inputRespHonorarios"></div>
+                    <div class="input-group"><label>Obs:</label><textarea id="inputObsHonorarios"></textarea></div>
+                </div>
+            </div>
+
+            <div id="tab-perfil" class="tab-section">
+                <div id="containerPerfilCheckboxes"></div>
+                <div class="input-group" style="margin-top:20px; border-top:1px solid #ddd; padding-top:10px;"><label>Na reunião identificamos...</label><textarea id="inputObsPerfil"></textarea></div>
+            </div>
+
+            <div id="tab-tecnica" class="tab-section">
+                <div class="input-group"><label>Servidor:</label><select id="selTipoServidor" onchange="updateAll()"><option value="">Selecionar...</option><option value="WINDOWS">WINDOWS</option><option value="LINUX">LINUX</option><option value="DOMINIO WEB">DOMINIO WEB</option></select></div>
+                <div id="infoWindows" class="info-text-box hidden" style="border-left-color: #3b82f6; background: #eff6ff;"><b>ℹ️ Windows:</b> <a href="https://suporte.dominioatendimento.com/central/faces/solucao.html?codigo=4351" target="_blank">Link Especificações</a></div>
+                <div id="infoLinux" class="info-text-box hidden" style="border-left-color: #f59e0b; background: #fffbeb;"><b>ℹ️ Linux:</b> CentOS 9 Stream, Fedora Server 36, Alma 9.4, Rocky 9.4, Ubuntu 24.04, Debian 12.7</div>
+                <div id="groupDominioWeb" class="hidden"><div class="input-group"><label>Provedor:</label><input type="text" id="inputProvedor"></div><div class="input-group"><label>Velocidade:</label><input type="text" id="inputVelocidade"></div><div class="info-text-box" style="border-left-color: #10b981; background: #ecfdf5;"><b>ℹ️ Domínio Web:</b> Atualizações noturnas, backups diários.</div></div>
+            </div>
+
+            <div id="tab-modulos" class="tab-section">
+                <div id="listaModulos"></div>
+                <div class="input-group" style="margin-top:20px; border-top:2px solid #eee; padding-top:10px;"><label style="color:var(--primary-color);">TEMPO TOTAL:</label><input type="text" id="inputTempoTotal" readonly style="font-weight:bold; background:#eee; color:#333;"></div>
+            </div>
+        </div>
+
+        <div class="editor-footer">
+            <button class="btn-download" onclick="baixarHTML()">💾 Salvar ATA</button>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <div class="a4-paper" id="a4Content">
+            <div class="report-header"><h1>Reunião de Boas Vindas</h1><p>Alinhamento de processos e definição de cronograma.</p></div>
+            <div class="client-box"><div><span class="client-label">CÓDIGO</span><div class="client-value" id="viewCodigo">---</div></div><div><span class="client-label">RAZÃO SOCIAL</span><div class="client-value" id="viewRazao">---</div></div></div>
+
+            <div class="section-title">Participantes</div><div class="participant-group"><b>Técnicos Resulta:</b><br><span id="viewTecnicos">-</span></div><div class="participant-group"><b>Usuários Folha:</b><br><span id="viewFolha">-</span></div><div class="participant-group"><b>Usuários Escrita:</b><br><span id="viewEscrita">-</span></div><div class="participant-group"><b>Usuários Contábil:</b><br><span id="viewContabil">-</span></div>
+            
+            <div id="wrapperConversao" class="hidden">
+                <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
+                <div class="section-title">Conversão de Dados</div>
+                <p style="font-size:10pt"><b>Tipo:</b> <span id="viewTipoConversao">...</span></p>
+                <div id="viewDetalhesConversao" class="conversion-card">
+                    <div class="timeline-item"><span>1. Coleta Banco</span><span style="font-weight:bold" id="viewDataColeta">--/--/----</span></div>
+                    <div class="timeline-item"><span>2. Disp. Planilha</span><span style="font-weight:bold" id="viewDataPlanilha">--/--/----</span></div>
+                    <div class="timeline-item"><span>3. Retorno Planilha</span><span style="font-weight:bold" id="viewDataRetorno">--/--/----</span></div>
+                    <div class="timeline-item"><span>4. Prazo Conclusão</span><span style="font-weight:bold" id="viewPrazo">--/--/----</span></div>
+                    <div id="viewObsContainer" class="hidden" style="margin-top:10px; border-top:1px dashed #ccc; padding-top:5px;"><b>Obs:</b> <span id="viewObsConversao"></span></div>
+                </div>
+                
+                <div id="viewDicasConversao" class="hidden" style="margin-top:15px;">
+                    <div class="info-text-box" style="border-left-color: #f59e0b; background: #fffbeb; margin-bottom:5px;">
+                        <b>⚠️ MOVIMENTAÇÕES PÓS COLETA:</b><br>
+                        O banco de dados do seu sistema anterior será recolhido na data previamente combinada. Haverá o tempo do processo de conversão e conferência. 
+                        <b>Anote admissões, férias, rescisões e alterações realizadas</b> para repetir na Domínio.
+                    </div>
+                    <div class="info-text-box" style="border-left-color: #3b82f6; background: #eff6ff; margin-bottom:5px;">
+                        <b>ℹ️ RUBRICAS FIXAS:</b><br>
+                        Emita um relatório de quais rubricas estavam lançadas como fixas no seu software anterior. Será necessário lançar para os empregados na Domínio.
+                    </div>
+                    <div class="info-text-box" style="border-left-color: #8b5cf6; background: #f5f3ff; margin-bottom:5px;">
+                        <b>ℹ️ FÉRIAS:</b><br>
+                        Confira empregados que tiveram férias onde algum dia de gozo caiu dentro dessa competência. Para fechar a folha mensal, será necessário calcular essas férias na Domínio.
+                    </div>
+                    <div class="info-text-box" style="border-left-color: #10b981; background: #ecfdf5;">
+                        <b>ℹ️ PAGAMENTO (S-1210):</b><br>
+                        Avalie qual processo será adotado para envio do S-1210, visto que a folha anterior está no outro software.<br>
+                        Opções: Enviar pelo anterior OU Enviar pela Domínio (informando remuner. anterior).
+                    </div>
+                </div>
+            </div>
+
+            <div id="sectionMedias" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Médias</div><p><b>Permite médias?</b> <span id="viewPermiteMedias"></span></p><div id="textPadraoMedias" class="hidden info-text-box">Será elaborado uma listagem de rubricas do seu sistema anterior, como por exemplo horas extras, comissões, reflexos, entre outros.<br>Em seguida, será efetuado um mapeamento dessas rubricas para os padrões do sistema Domínio.<br>Nossa equipe fará a conferência dos dados e orientará onde as rubricas importadas podem ser consultadas.<br>Este procedimento permitira que os cálculos de férias, rescisão e 13º salário sejam realizados corretamente.</div><div id="viewObsMediasContainer" class="hidden" style="margin-top:10px;"><b>Detalhes:</b><br><span id="viewObsMedias"></span></div></div>
+            <div id="sectionRelatorios" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Relatórios</div><p><b>Possui relatórios?</b> <span id="viewRelatorios"></span></p><div id="viewDetalhesRelatorios" class="hidden" style="background:#f9fafb; padding:10px;"><p><b>Meta:</b> <span id="viewMetaRelatorios"></span> | <b>Resp:</b> <span id="viewRespRelatorios"></span></p></div><div id="viewObsRelatoriosContainer" class="hidden" style="margin-top:5px;"><b>Obs:</b> <span id="viewObsRelatorios"></span></div><div class="info-text-box" style="font-size:8pt; border-left-color: #3b82f6; background-color: #eff6ff;">Possuímos diversos relatórios personalizados já disponíveis. Caso observe algum relatório muito específico, consulte nossa base:<br><a href="https://suporte.dominioatendimento.com/central/faces/relatorios-personalizados.html" target="_blank" class="link-style">https://suporte.dominioatendimento.com/.../relatorios-personalizados.html</a></div></div>
+            <div id="sectionContabil" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Contabilidade</div><div class="kv-pair"><b>Plano:</b> <span id="viewPlanoContas"></span></div><div class="kv-pair hidden" id="viewRowTrazerPlano"><b>Trazer plano anterior?</b> <span id="viewTrazerPlano"></span></div><div class="kv-pair"><b>Saldos:</b> <span id="viewSaldos"></span></div><div class="kv-pair hidden" id="viewRowMetodoImport"><b>Método:</b> <span id="viewMetodoImportacao"></span></div><div id="viewAlertaDePara" class="hidden info-text-box" style="border-left-color:#ef4444; background:#fef2f2; color:#b91c1c;"><b>ATENÇÃO:</b> Necessário DE/PARA.</div><div id="viewObsContabilContainer" class="hidden" style="margin-top:10px;"><b>Obs:</b> <span id="viewObsContabil"></span></div></div>
+            <div id="sectionRbt12" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">RBT12</div><div class="kv-pair"><b>Inclusão:</b> <span id="viewRbt12Inclusao"></span></div><div id="viewRbt12PdfObs" class="hidden info-text-box"><b>Obs:</b> É necessario salvar o PDF de forma que o nome conste o código da empresa na Dominio. Exemplo: <b>10.pdf</b></div><div id="viewRbt12ExcelLink" class="hidden info-text-box" style="border-left-color:#3b82f6; background:#eff6ff;">Acesse a tabela: <a href="https://suporte.dominioatendimento.com/central/faces/solucao.html?codigo=9725" target="_blank" class="link-style">Clique aqui</a></div><div id="viewRbt12Detalhes" class="hidden" style="background:#f9fafb; padding:10px;"><p><b>Meta:</b> <span id="viewMetaRbt12"></span></p><p><b>Resp:</b> <span id="viewRespRbt12"></span></p></div></div>
+            <div id="sectionMetas" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Metas</div><div id="viewMetasTabela" class="hidden"><table class="metas-table"><thead><tr><th>Módulo</th><th>Início</th><th>Fim</th><th>Dias Úteis</th><th>Meta Diária</th><th>Meta Semanal</th></tr></thead><tbody id="tbodyMetas"></tbody></table></div><div id="viewMetasDescrito" class="hidden"><div class="metas-descrito" id="txtMetasDescritoPreview"></div></div></div>
+            <div id="sectionPerfil2"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Perfil II</div><div class="kv-pair"><b>Conhece Domínio?</b> <span id="viewUserDominio"></span></div><div class="kv-pair"><b>Captura:</b> <span id="viewCaptura"></span></div><div class="kv-pair"><b>Auditoria:</b> <span id="viewAuditoria"></span></div><div class="kv-pair"><b>Outros:</b> <span id="viewOutrosSoft"></span></div><div id="viewErpApiContainer" class="hidden" style="margin-top:10px;"><b>ERPs API:</b> <span id="viewErpApi"></span></div><div class="info-text-box" style="border-left-color: #8b5cf6; background: #f5f3ff;">A Dominio possui integração API, que permite receber notas diretamente do ERP do seu cliente.<br><a href="https://www.dominiosistemas.com.br/solucoes/integracao-com-erp/" target="_blank" class="link-style">Saiba mais</a></div><div id="viewObsPerfil2Container" class="hidden" style="margin-top:10px;"><b>Obs Gerais:</b> <span id="viewObsPerfil2"></span></div></div>
+            <div id="sectionDificuldades" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Dificuldades</div><div id="viewDifFolha" class="hidden diff-box"><span class="diff-title">Folha:</span><span class="diff-content"></span></div><div id="viewDifEscrita" class="hidden diff-box"><span class="diff-title">Escrita:</span><span class="diff-content"></span></div><div id="viewDifContabil" class="hidden diff-box"><span class="diff-title">Contábil:</span><span class="diff-content"></span></div></div>
+            <div id="sectionPatrimonio" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Patrimônio</div><div class="kv-pair"><b>Possui?</b> <span id="viewPossuiPatr"></span></div><div id="viewRowBens" class="hidden kv-pair"><b>Controle Bens?</b> <span id="viewControleBens"></span></div><div id="viewInfoPatr" class="hidden info-text-box" style="border-left-color: #3b82f6; background: #eff6ff;"><b>ℹ️ Importante:</b> Para facilitar a inclusão dos bens dentro do modulo Patrimonio fornecemos uma planilha. Objetivo é agilizar o processo de inclusão e movimentação do modulo.<br><a href="https://suporte.dominioatendimento.com/central/faces/solucao.html?codigo=9133" target="_blank" class="link-style">Passo a passo</a></div><div id="viewObsPatrContainer" class="hidden"><b>Detalhes:</b> <span id="viewObsPatr"></span></div></div>
+            <div id="sectionHonorarios" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Honorários</div><div class="kv-pair"><b>Possui?</b> <span id="viewPossuiHonor"></span></div><div id="viewDetalhesHonor" class="hidden"><div class="kv-pair"><b>Boletos?</b> <span id="viewBoletos"></span></div><div class="kv-pair hidden" id="viewRowBanco"><b>Banco:</b> <span id="viewBanco"></span></div><div class="kv-pair"><b>NFS-e?</b> <span id="viewNFS"></span></div><div class="kv-pair"><b>Resp:</b> <span id="viewRespHonor"></span></div><div id="viewObsHonorContainer" class="hidden"><b>Obs:</b> <span id="viewObsHonor"></span></div></div></div>
+            <div id="sectionPerfil"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Perfil</div><ul class="profile-list" id="listPerfil"></ul><div id="viewObsPerfilContainer" class="hidden" style="margin-top:15px;"><b>Situações identificadas:</b><br><div id="viewObsPerfil" style="color:#333;"></div></div></div>
+            <div id="sectionTecnica" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Técnica</div><div class="kv-pair"><b>Servidor:</b> <span id="viewTipoServidor"></span></div><div id="viewDominioWebDetails" class="hidden"><div class="kv-pair"><b>Provedor:</b> <span id="viewProvedor"></span></div><div class="kv-pair"><b>Velocidade:</b> <span id="viewVelocidade"></span></div></div><div id="viewInfoWindows" class="hidden info-text-box"><b>Windows:</b> <a href="https://suporte.dominioatendimento.com/central/faces/solucao.html?codigo=4351" target="_blank">Link Especificações</a></div><div id="viewInfoLinux" class="hidden info-text-box"><b>Linux:</b> CentOS 9 Stream, Fedora Server 36, Alma 9.4, Rocky 9.4, Ubuntu 24.04, Debian 12.7</div><div id="viewInfoDW" class="hidden info-text-box"><b>Domínio Web:</b> Atualizações noturnas, backups diários.</div></div>
+            <div id="sectionModulos" class="hidden"><hr style="border:0; border-top:1px solid #eee; margin: 20px 0;"><div class="section-title">Horas</div><table class="hours-table"><tbody id="viewTabelaHoras"></tbody><tfoot><tr><td>Total</td><td class="col-time" id="viewTotalHoras">00:00</td></tr></tfoot></table></div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
