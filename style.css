@@ -1,7 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f2f2f2;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f2f2f2;
 }
 
 header {
@@ -32,6 +36,16 @@ main {
 #formulario textarea {
   width: 100%;
   padding: 8px;
+  margin-top: 5px;
+}
+
+#formulario button {
+  background: #fa6400;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 #preview {
